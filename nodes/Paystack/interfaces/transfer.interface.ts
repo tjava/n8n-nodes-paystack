@@ -1,5 +1,9 @@
 /** Recipient type for POST /transferrecipient */
-export type TransferRecipientType = 'nuban' | 'mobile_money' | 'basa' | 'ghipss';
+export type TransferRecipientType =
+  | "nuban"
+  | "mobile_money"
+  | "basa"
+  | "ghipss";
 
 /** Body for POST /transferrecipient */
 export interface CreateTransferRecipientBody {
@@ -47,7 +51,7 @@ export interface TransferRecipient {
 /** Body for POST /transfer (initiate) */
 export interface InitiateTransferBody {
   /** Source of funds — currently only 'balance' is supported */
-  source: 'balance';
+  source: "balance";
   /** Amount in subunit (required) */
   amount: number;
   /** Recipient code from create recipient (required) */

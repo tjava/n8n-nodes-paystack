@@ -78,7 +78,7 @@ export interface ListTransactionsQuery {
   perPage?: number;
   page?: number;
   customer?: string;
-  status?: 'abandoned' | 'failed' | 'success';
+  status?: "abandoned" | "failed" | "success";
   from?: string;
   to?: string;
   amount?: number;

@@ -5,7 +5,14 @@ export interface CreatePlanBody {
   /** Amount in subunit of currency (required) */
   amount: number;
   /** Billing interval (required) */
-  interval: 'hourly' | 'daily' | 'weekly' | 'monthly' | 'quarterly' | 'biannually' | 'annually';
+  interval:
+    | "hourly"
+    | "daily"
+    | "weekly"
+    | "monthly"
+    | "quarterly"
+    | "biannually"
+    | "annually";
   /** Description of the plan */
   description?: string;
   /** Currency code, e.g. NGN */
