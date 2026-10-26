@@ -123,6 +123,46 @@ export class Paystack implements INodeType {
         description: "Amount in kobo (if NGN) or subunit of currency",
       },
       {
+        displayName: "Metadata",
+        name: "metadata",
+        type: "fixedCollection",
+        typeOptions: {
+          multipleValues: true,
+        },
+        displayOptions: {
+          show: {
+            resource: ["transaction"],
+            operation: ["initialize"],
+          },
+        },
+        default: {},
+        description:
+          "Custom data returned by Paystack in transaction webhook events",
+        options: [
+          {
+            displayName: "Metadata",
+            name: "values",
+            values: [
+              {
+                displayName: "Key",
+                name: "key",
+                type: "string",
+                default: "",
+                required: true,
+                description: "The metadata property name",
+              },
+              {
+                displayName: "Value",
+                name: "value",
+                type: "string",
+                default: "",
+                description: "The metadata property value",
+              },
+            ],
+          },
+        ],
+      },
+      {
         displayName: "Transaction ID or Reference",
         name: "transactionId",
         type: "string",
@@ -615,6 +655,17 @@ export class Paystack implements INodeType {
               email: this.getNodeParameter("email", i),
               amount: this.getNodeParameter("amount", i),
             };
+
+            const metadata = this.getNodeParameter("metadata", i, {}) as {
+              values?: Array<{ key: string; value: string }>;
+            };
+
+            if (metadata.values?.length) {
+              body.metadata = Object.fromEntries(
+                metadata.values.map(({ key, value }) => [key, value]),
+              );
+            }
+
             responseData = await paystackApiRequest.call(
               this,
               "POST",

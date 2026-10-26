@@ -14,6 +14,12 @@ This is an n8n community node to interact with [Paystack](https://paystack.com/)
 - **Balance & Banks**: Check your balance and resolve bank accounts.
 - **Webhook Trigger**: Listen for real-time events from Paystack.
 
+## What's New
+
+### 0.1.4
+
+- Transaction initialization now supports custom metadata. Paystack returns this metadata in transaction webhook events, allowing workflows to associate a payment with internal records such as an order or user.
+
 ## Installation
 
 Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) in the n8n community nodes documentation.
@@ -34,7 +40,7 @@ To use this node, you need a Paystack account.
 ## Operations
 
 ### Transaction
-- **Initialize**: Start a new transaction.
+- **Initialize**: Start a new transaction, optionally including custom metadata.
 - **Verify**: Confirm the status of a transaction using its reference.
 - **Fetch**: Get details of a single transaction.
 - **List**: Retrieve a list of your transactions.
@@ -73,6 +79,16 @@ To use this node, you need a Paystack account.
 
 ### Webhook Trigger
 Use the **Paystack Trigger** node to receive notifications for events like `charge.success`, `transfer.success`, and `subscription.create`. Ensure you copy the Webhook URL from the node and paste it into your Paystack Dashboard settings.
+
+#### Transaction Metadata
+
+When initializing a transaction, use **Metadata** to add one or more custom key/value pairs. For example, add `orderId` with the value `ORD-12345` to associate the payment with an internal order.
+
+Paystack includes these values in the webhook payload. In a node after **Paystack Trigger**, access the example value with:
+
+```text
+{{$json.data.metadata.orderId}}
+```
 
 ## Development
 
