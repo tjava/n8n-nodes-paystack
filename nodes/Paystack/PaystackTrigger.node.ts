@@ -14,7 +14,10 @@ export class PaystackTrigger implements INodeType {
   description: INodeTypeDescription = {
     displayName: "Paystack Trigger",
     name: "paystackTrigger",
-    icon: "file:paystack.svg",
+    icon: {
+      light: "file:paystack.svg",
+      dark: "file:paystack.svg",
+    },
     group: ["trigger"],
     version: 1,
     subtitle: '={{$parameter["events"].join(", ")}}',
@@ -64,7 +67,6 @@ export class PaystackTrigger implements INodeType {
         description: "The events to listen for",
       },
     ],
-    usableAsTool: true,
   };
 
   webhookMethods = {

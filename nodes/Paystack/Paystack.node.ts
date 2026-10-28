@@ -19,7 +19,10 @@ export class Paystack implements INodeType {
   description: INodeTypeDescription = {
     displayName: "Paystack",
     name: "paystack",
-    icon: "file:paystack.svg",
+    icon: {
+      light: "file:paystack.svg",
+      dark: "file:paystack.svg",
+    },
     group: ["transform"],
     version: 1,
     subtitle: '={{$parameter["resource"] + ": " + $parameter["operation"]}}',
